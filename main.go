@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"time"
 
 	"cloud.google.com/go/alloydbconn"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -86,7 +87,7 @@ func main() {
 	defer pool.Close()
 
 	// Test the connection
-	var now string
+	var now time.Time
 	err = pool.QueryRow(ctx, "SELECT NOW()").Scan(&now)
 	if err != nil {
 		log.Fatalf("Failed to execute query: %v", err)
